@@ -8,7 +8,9 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Petfy.Data;
 using Petfy.Data.Models;
+using Petfy.Domain.DTO;
 using Petfy.Domain.Services;
+using Petfy.UI.WebAPI.DTO;
 
 namespace Petfy.UI.WebAPI.Controllers
 {
@@ -137,7 +139,7 @@ namespace Petfy.UI.WebAPI.Controllers
 
         // POST: api/Pets
         [HttpPost]
-        public async Task<ActionResult<Pet>> PostPet(Pet pet)
+        public async Task<ActionResult<Pet>> PostPet(PetDTO pet)
         {
             var pets = _petservice.GetAllPets();
             if (pets == null)
@@ -153,7 +155,7 @@ namespace Petfy.UI.WebAPI.Controllers
 
                 throw ex;
             }
-
+            //return Ok(pet);
             return CreatedAtAction("GetPet", new { id = pet.ID }, pet);
         }
 

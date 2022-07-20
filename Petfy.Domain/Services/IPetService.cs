@@ -1,4 +1,5 @@
 ﻿using Petfy.Data.Models;
+using Petfy.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace Petfy.Domain.Services
 
         public Pet GetById(int id); //GetById
 
-        void AddPet(Pet pet); //AddPet
+        void AddPet(PetDTO pet); //AddPet
 
         public Pet EditPet(int Id, Pet updatedPet); //EditPet
         public bool DeletePet(int id);//DeletePet

@@ -1,5 +1,6 @@
 ﻿using Petfy.Data.Models;
 using Petfy.Data.Repositories;
+using Petfy.Domain.DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -46,10 +47,20 @@ namespace Petfy.Domain.Services
             return _petRepository.GetById(id);
         }
 
-        public void AddPet(Pet pet)
+        public void AddPet(PetDTO petDTO)
         {
             try
             {
+                Pet pet = new Pet()
+                {
+                    Name = petDTO.Name,
+                    Breed = petDTO.Breed,
+                    Description = petDTO.Description,
+                    PetNumber = petDTO.PetNumber,
+                    DateOfBirth = petDTO.DateOfBirth,
+                    Type = petDTO.Type,
+                    OwnerID=petDTO.OwnerID
+                };
                 _petRepository.AddPet(pet);
             }
             catch (Exception ex)
