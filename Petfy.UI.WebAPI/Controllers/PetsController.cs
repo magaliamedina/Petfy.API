@@ -18,9 +18,9 @@ namespace Petfy.UI.WebAPI.Controllers
     [Authorize]
     public class PetsController : ControllerBase
     {
-        private readonly PetService _petservice;
+        private readonly IPetService _petservice;
 
-        public PetsController(PetService petService)
+        public PetsController(IPetService petService)
         {
             _petservice = petService;
         }
@@ -37,8 +37,9 @@ namespace Petfy.UI.WebAPI.Controllers
             return pets;
         }
 
+        //los que reciben string no se pone el tipo de dato al lado
         // GET: api/Pets/bullterrier
-        [HttpGet("{breed:string}")]
+        [HttpGet("{breed}")]
         public async Task<ActionResult<IEnumerable<Pet>>> GetPets(string breed)
         {
             var pets = _petservice.GetByBreed(breed);
@@ -49,7 +50,19 @@ namespace Petfy.UI.WebAPI.Controllers
             return pets;
         }
 
-        // GET: api/Pets/5/vaccines
+        //// GET: api/Pets/Breed/Bulterrier/OwnerId/3
+        //[HttpGet("/breed/{breed}/ownerid/{ownerid}:int")]
+        //public async Task<ActionResult<IEnumerable<Pet>>> GetPetss(string breed, int ownerId)
+        //{
+        //    var pets = _petservice.GetByBreed(breed);
+        //    if (pets == null)
+        //    {
+        //        return NotFound();
+        //    }
+        //    return pets;
+        //}
+
+        // GET: api/Pets/3/vaccines
         [HttpGet("{id:int}/vaccines")]
         public async Task<ActionResult<IEnumerable<Vaccine>>> GetPetsVaccines(int id)
         {
@@ -62,7 +75,7 @@ namespace Petfy.UI.WebAPI.Controllers
         }
 
         // GET: api/Pets/ownerid/5
-        [HttpGet("/ownerid/{ownerId:int}")]
+        [HttpGet("ownerid/{ownerId:int}")]
         public async Task<ActionResult<IEnumerable<Pet>>> GetPetsByOwnerId(int ownerId)
         {
             var pets = _petservice.GetByOwnerId(ownerId);

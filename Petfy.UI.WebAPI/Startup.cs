@@ -1,9 +1,11 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Petfy.Data;
+using Petfy.Data.Repositories;
 using Petfy.Domain.Services;
 using Petfy.UI.WebAPI.Middleware;
 using System.Text;
+using System.Text.Json.Serialization;
 
 namespace Petfy.UI.WebAPI
 {
@@ -36,6 +38,13 @@ namespace Petfy.UI.WebAPI
                     ValidateAudience = false,
                 };
             });
+
+            services.AddScoped<IPetRepository, PetRepository>();
+            services.AddScoped<IPetService, PetService>();
+            //se agrego debido a error al ejecutar getpets
+            services.AddControllers().AddJsonOptions(x =>
+                x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);
+
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

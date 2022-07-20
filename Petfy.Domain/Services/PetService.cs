@@ -11,9 +11,9 @@ namespace Petfy.Domain.Services
     //aca se hace: 1. validaciones 2. capturar errores y retornarlos 3. cambios a nivel de lo que el usuario va a ver  (ej que solo se actualice un solo campo en el edit)
     public class PetService : IPetService
     {
-        private readonly PetRepository _petRepository;
+        private readonly IPetRepository _petRepository;
 
-        public PetService(PetRepository petRepository)
+        public PetService(IPetRepository petRepository)
         {
            _petRepository = petRepository;
         }

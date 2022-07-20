@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 namespace Petfy.Domain.Services
 {
     //servicio que se encarga de hacer las llamadas al repositorio
+    //el servicio siempre se hace la inyeccion de dependencia en el program.cs o startup.cs en este caso
     public interface IPetService
     {
         public List<Pet> GetAllPets(); //GetAll

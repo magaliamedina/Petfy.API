@@ -7,16 +7,16 @@ namespace Petfy.Data.Repositories
     //Manejan los datos a nivel de BD
     public class PetRepository : IPetRepository
     {
-        private readonly PetfyDbContext context;
+        private readonly PetfyDbContext _context;
 
         public PetRepository(PetfyDbContext context)
         {
-            context=context;
+            _context=context;
         }
 
         public List<Pet> GetAllPets()
         {
-            return context.Pets.Include(p =>  p.Vaccines).ToList();
+            return _context.Pets.Include(p =>  p.Owner).ToList();
         }
 
         //public List<Pet> GetByBreed(string Breed)
@@ -42,7 +42,7 @@ namespace Petfy.Data.Repositories
 
         public Pet GetById(int Id)
         {
-            return context.Pets.Find(Id);
+            return _context.Pets.Find(Id);
         }
 
         public void AddPet(Pet pet)
@@ -51,8 +51,8 @@ namespace Petfy.Data.Repositories
             {
                 try
                 {
-                    context.Pets.Add(pet);
-                    context.SaveChanges();
+                    _context.Pets.Add(pet);
+                    _context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -65,7 +65,7 @@ namespace Petfy.Data.Repositories
 
         public Pet EditPet(int Id,Pet updatedPet)
         {
-            var oldPet = context.Pets.Find(Id);
+            var oldPet = _context.Pets.Find(Id);
             if(oldPet!= null && oldPet.ID == updatedPet.ID)
             {
                 //el id no se modifica
@@ -80,7 +80,7 @@ namespace Petfy.Data.Repositories
 
                 try
                 {
-                    context.SaveChanges();
+                    _context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
@@ -95,13 +95,13 @@ namespace Petfy.Data.Repositories
         }
         public bool DeletePet(int id)
         {
-            var pet = context.Pets.Find(id);
+            var pet = _context.Pets.Find(id);
             if(pet != null)
             {
                 try
                 {
-                    context.Pets.Remove(pet);
-                    context.SaveChanges();
+                    _context.Pets.Remove(pet);
+                    _context.SaveChanges();
                 }
                 catch (Exception ex)
                 {
