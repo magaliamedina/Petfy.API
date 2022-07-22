@@ -99,6 +99,21 @@ namespace Petfy.Domain.Services
 
         public bool DeletePet(int id)
         {
+            if (id <= 0)
+            {
+                return false;
+            }
+
+            var pet = _petRepository.GetById(id);
+            if (pet == null)
+            {
+                throw new ApplicationException("Pet not found");
+            }
+            if (pet.Owner == null )
+            {
+                throw new ApplicationException("Pet cant be deleted because it has an owner");
+            }
+
             try
             {
                 return _petRepository.DeletePet(id);
