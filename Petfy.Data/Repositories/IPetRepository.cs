@@ -19,7 +19,7 @@ namespace Petfy.Data.Repositories
 
         public void AddPet(Pet pet); //AddPet
 
-        public Pet EditPet(int Id, Pet updatedPet); //EditPet
+        public Pet EditPet(Pet updatedPet); //EditPet
         public bool DeletePet(int id);//DeletePet
     }
 }

@@ -64,36 +64,20 @@ namespace Petfy.Data.Repositories
             }
         }
 
-        public Pet EditPet(int Id,Pet updatedPet)
+        public Pet EditPet(Pet updatedPet)
         {
-            var oldPet = _context.Pets.Find(Id);
-            if(oldPet!= null && oldPet.ID == updatedPet.ID)
+            try
             {
-                //el id no se modifica
-                oldPet.Name = updatedPet.Name;
-                oldPet.Description = updatedPet.Description;
-                //no se cambia desde el punto de vista de negocio
-                //oldPet.Breed = updatedPet.Breed;
-                //oldPet.Type = updatedPet.Type;
-                //oldPet.Vaccines = updatedPet.Vaccines;
-                oldPet.DateOfBirth = updatedPet.DateOfBirth;
-                oldPet.PetNumber = updatedPet.PetNumber;
-
-                try
-                {
-                    _context.SaveChanges();
-                }
-                catch (Exception ex)
-                {
-
-                    throw ex;
-                }
-
-                return oldPet;
-                
+                _context.Update(updatedPet);
+                _context.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                throw ex;
             }
             return updatedPet;
         }
+
         public bool DeletePet(int id)
         {
             var pet = _context.Pets.Find(id);

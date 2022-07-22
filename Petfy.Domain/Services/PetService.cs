@@ -70,18 +70,33 @@ namespace Petfy.Domain.Services
             }
         }
 
-        public Pet EditPet(int Id, Pet updatedPet)
+        public Pet EditPet(int Id, PetDTO updatedPet)
         {
-            try
+            var oldPet = GetById(Id);
+            if (oldPet != null)
             {
-                return _petRepository.EditPet(Id, updatedPet);
-            }
-            catch (Exception ex)
-            {
+                //el id no se modifica
+                oldPet.Name = updatedPet.Name;
+                oldPet.Description = updatedPet.Description;
+                //no se cambia desde el punto de vista de negocio
+                //oldPet.Breed = updatedPet.Breed;
+                //oldPet.Type = updatedPet.Type;
+                //oldPet.Vaccines = updatedPet.Vaccines;
+                oldPet.DateOfBirth = updatedPet.DateOfBirth;
+                oldPet.PetNumber = updatedPet.PetNumber;
+                try
+                {
+                    return _petRepository.EditPet(oldPet);
+                }
+                catch (Exception ex)
+                {
 
-                throw ex;
+                    throw ex;
+                }
             }
+            return null;
         }
+
         public bool DeletePet(int id)
         {
             try
