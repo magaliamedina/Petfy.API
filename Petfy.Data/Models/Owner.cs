@@ -6,14 +6,14 @@ using System.Threading.Tasks;
 
 namespace Petfy.Data.Models
 {
-    public class Owner
+    public class Owner:User
     {
         //public Owner()
         //{
         //    Pets = new List<Pet>();
         //}
 
-        public int ID { get; set; }
+        //public int ID { get; set; }
 
         public string Name { get; set; }
 

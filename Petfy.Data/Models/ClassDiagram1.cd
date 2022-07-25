@@ -3,7 +3,7 @@
   <Class Name="Petfy.Data.Models.Owner">
     <Position X="0.5" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAMAAAAAAQAAAAQAAACAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAMAAAAAAQAAAAQAAACAAAAAAAAAAA=</HashCode>
       <FileName>Models\Owner.cs</FileName>
     </TypeIdentifier>
     <ShowAsCollectionAssociation>
@@ -13,7 +13,7 @@
   <Class Name="Petfy.Data.Models.Pet">
     <Position X="3" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAACAAAAgiAAAAAAAAAQAAAAQAKAAAQAAAAIAAAA=</HashCode>
+      <HashCode>AAAAAACAAABgiCAAAAAAAAQAAAAQAKAAAQAAAAIAAAA=</HashCode>
       <FileName>Models\Pet.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
@@ -37,8 +37,8 @@
       <FileName>Models\PetVaccine.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Property Name="Vaccine" />
       <Property Name="Pet" />
+      <Property Name="Vaccine" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Petfy.Data.Models.User" Collapsed="true">

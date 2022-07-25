@@ -1,3 +1,4 @@
+using AutoMapper;
 using Moq;
 using Petfy.Data.Models;
 using Petfy.Data.Repositories;
@@ -9,6 +10,7 @@ namespace Petfy.API.Test
     public class UnitTest1
     {
         private Mock<IPetRepository> _mockRepository;
+        private Mock<IMapper> _mockMapper; 
         private PetService petService;
         public const int petIDNegative = -1;
         public const int petID0 = 0;
@@ -26,7 +28,7 @@ namespace Petfy.API.Test
             _mockRepository.Setup(x => x.DeletePet(petID0)).Returns(true);
             _mockRepository.Setup(x => x.GetById(petIDNotFound)).Returns((Pet)null);
             _mockRepository.Setup(x => x.GetById(petIDNoOwner)).Returns(new Pet() { Owner = null });
-            petService = new PetService(_mockRepository.Object);
+            petService = new PetService(_mockRepository.Object, _mockMapper.Object);
         }
 
         [TestMethod]

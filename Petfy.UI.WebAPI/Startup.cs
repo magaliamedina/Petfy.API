@@ -2,6 +2,7 @@
 using Microsoft.IdentityModel.Tokens;
 using Petfy.Data;
 using Petfy.Data.Repositories;
+using Petfy.Domain.Extensions;
 using Petfy.Domain.Services;
 using Petfy.UI.WebAPI.Middleware;
 using System.Text;
@@ -41,6 +42,9 @@ namespace Petfy.UI.WebAPI
 
             services.AddScoped<IPetRepository, PetRepository>();
             services.AddScoped<IPetService, PetService>();
+            //typeof(AutoMapperProfiles) convierte a objeto
+            services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
+
             //se agrego debido a error al ejecutar getpets
             services.AddControllers().AddJsonOptions(x =>
                 x.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

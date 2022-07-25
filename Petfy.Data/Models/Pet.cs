@@ -19,6 +19,12 @@ namespace Petfy.Data.Models
 
         //public List<PetVaccine> PetVaccines { get; set; } = new List<PetVaccine>();
         public List<Vaccine> Vaccines { get; set; } = new List<Vaccine>();
+        public List<Photo> Photos { get; set; }
+
+        public int GetAge()
+        {
+            return 1;
+        }
 
     }
 }

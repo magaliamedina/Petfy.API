@@ -9,7 +9,7 @@ namespace Petfy.Data.Repositories
 {
     public interface IPetRepository
     {
-        public List<Pet> GetAllPets(); //GetAll
+        public IEnumerable<Pet> GetAllPets(); //GetAll
 
         //public List<Pet> GetByBreed(string Breed);
         //public List<Pet> GetByOwnerId(int OwnerId); 

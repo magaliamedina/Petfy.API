@@ -1,4 +1,5 @@
-﻿using Petfy.Data.Models;
+﻿using AutoMapper;
+using Petfy.Data.Models;
 using Petfy.Data.Repositories;
 using Petfy.Domain.DTO;
 using System;
@@ -13,14 +14,20 @@ namespace Petfy.Domain.Services
     public class PetService : IPetService
     {
         private readonly IPetRepository _petRepository;
+        //el automapper se puede hacer la inyeccion de dependencia en el service o en el controller en el caso que no tenga service
+        //el servicio devuelve DTO
+        private readonly IMapper _mapper;
 
-        public PetService(IPetRepository petRepository)
+        public PetService(IPetRepository petRepository, IMapper mapper)
         {
            _petRepository = petRepository;
+           _mapper = mapper;
         }
-        public List<Pet> GetAllPets()
-        {
-            return _petRepository.GetAllPets();
+        public IEnumerable<PetDTO> GetAllPets()
+        {//el automapper realiza mapeo automatico del pet a petDTO
+            var pet= _petRepository.GetAllPets();
+            var petsToReturn = _mapper.Map<IEnumerable<PetDTO>>(pet);
+            return petsToReturn;
         }
 
         public List<Pet> GetByBreed(string Breed)
@@ -42,9 +49,11 @@ namespace Petfy.Domain.Services
                throw ex;
             }  
         }
-        public Pet GetById(int id)
+        public PetDTO GetById(int id)
         {
-            return _petRepository.GetById(id);
+            var pet = _petRepository.GetById(id);
+            var petToReturn = _mapper.Map<PetDTO>(pet);
+            return petToReturn;
         }
 
         public void AddPet(PetDTO petDTO)
@@ -72,7 +81,7 @@ namespace Petfy.Domain.Services
 
         public Pet EditPet(int Id, PetDTO updatedPet)
         {
-            var oldPet = GetById(Id);
+            var oldPet = _petRepository.GetById(Id); //trae el pet
             if (oldPet != null)
             {
                 //el id no se modifica

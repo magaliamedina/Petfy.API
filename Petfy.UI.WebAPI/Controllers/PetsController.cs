@@ -29,14 +29,14 @@ namespace Petfy.UI.WebAPI.Controllers
 
         // GET: api/Pets
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pet>>> GetPets()
+        public async Task<ActionResult<IEnumerable<PetDTO>>> GetPets()
         {
             var pets= _petservice.GetAllPets();
             if (pets == null)
             {
                 return NotFound();
             }
-            return pets;
+            return Ok(pets);
         }
 
         //los que reciben string no se pone el tipo de dato al lado
@@ -91,7 +91,7 @@ namespace Petfy.UI.WebAPI.Controllers
         //el nombre del http tiene que ser igual que el del parametro
         // GET: api/Pets/5
         [HttpGet("{id:int}")]
-        public async Task<ActionResult<Pet>> GetPet(int id)
+        public async Task<ActionResult<PetDTO>> GetPet(int id)
         {
             var pets = _petservice.GetAllPets();
             if (pets == null)
@@ -105,7 +105,7 @@ namespace Petfy.UI.WebAPI.Controllers
                 return NotFound();
             }
 
-            return pet;
+            return Ok(pet);
         }
 
         // PUT: api/Pets/5
@@ -155,8 +155,8 @@ namespace Petfy.UI.WebAPI.Controllers
 
                 throw ex;
             }
-            //return Ok(pet);
-            return CreatedAtAction("GetPet", new { id = pet.ID }, pet);
+            return Ok(pet);
+            //return CreatedAtAction("GetPet", new { id = pet.ID }, pet);
         }
 
         // DELETE: api/Pets/5

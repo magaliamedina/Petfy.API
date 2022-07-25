@@ -12,13 +12,14 @@ namespace Petfy.Domain.Services
     //el servicio siempre se hace la inyeccion de dependencia en el program.cs o startup.cs en este caso
     public interface IPetService
     {
-        public List<Pet> GetAllPets(); //GetAll
+        //cambiar a todos que devuelva un petDTO
+        public IEnumerable<PetDTO> GetAllPets(); //GetAll
 
         public List<Pet> GetByBreed(string Breed);
         public List<Pet> GetByOwnerId(int OwnerId);
         public List<Vaccine> GetAllVaccines(int PetId);
 
-        public Pet GetById(int id); //GetById
+        public PetDTO GetById(int id); //GetById
 
         void AddPet(PetDTO pet); //AddPet
 

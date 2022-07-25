@@ -4,14 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Petfy.Data.Models
+namespace Petfy.Domain.DTO
 {
-    public class User //: IdentityUser<int>
+    public class UserDTO
     {
         public int ID { get; set; }
         public string UserName { get; set; }
         public byte[] PasswordHash { get; set; }
         public byte[] PasswordSalt { get; set; }
-        //public ICollection<AppUserRole> UserRoles { get; set; }
     }
 }
