@@ -21,7 +21,7 @@ namespace Petfy.UI.WebAPI.Controllers
         //Get
         //GetUsers
         [HttpGet]
-        public ActionResult<IEnumerable<User>> GetUsers()
+        public ActionResult<IEnumerable<AppUser>> GetUsers()
         {
             return Ok(_context.Users.ToList());
         }
@@ -29,7 +29,7 @@ namespace Petfy.UI.WebAPI.Controllers
         //Get
         //GetUserById
         [HttpGet("{id}")]
-        public ActionResult<User> GetUser(int id)
+        public ActionResult<AppUser> GetUser(int id)
         {
             return Ok(_context.Users.Find(id));
         }

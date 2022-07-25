@@ -15,7 +15,7 @@ namespace Petfy.Domain.Extensions
         public AutoMapperProfiles()
         {
             //Configurar los mapas
-            CreateMap<User, UserDTO>();
+            CreateMap<AppUser, UserDTO>();
             //origen, destino
             CreateMap<Pet, PetDTO>()
                 .ForMember(

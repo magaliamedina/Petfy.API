@@ -9,6 +9,6 @@ namespace Petfy.Domain.Services
 {
     public interface ITokenService
     {
-        string CreateToken(User user);
+        string CreateToken(AppUser user);
     }
 }

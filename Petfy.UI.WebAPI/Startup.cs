@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using Petfy.Data;
+using Petfy.Data.Models;
 using Petfy.Data.Repositories;
 using Petfy.Domain.Extensions;
 using Petfy.Domain.Services;
@@ -23,6 +25,16 @@ namespace Petfy.UI.WebAPI
         {
             // Add services to the container.
             services.AddDbContext<PetfyDbContext>();
+            services.AddIdentityCore<AppUser>(opt =>
+            {
+                opt.SignIn.RequireConfirmedEmail = false;
+            })
+                .AddRoles<AppRole>()
+                .AddRoleManager<RoleManager<AppRole>>()
+                .AddSignInManager<SignInManager<AppUser>>()
+                .AddRoleValidator<RoleValidator<AppUser>>()
+                .AddEntityFrameworkStores<PetfyDbContext>();
+
             services.AddScoped<ITokenService, TokenService>();
             services.AddControllers();
             services.AddEndpointsApiExplorer();
